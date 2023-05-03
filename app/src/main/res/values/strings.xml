@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Todo Application</string>
+    <string name="logo_content_description">ontime application logo</string>
+    <string name="button_notifications_content_description">notifications button</string>
+    <string name="button_more_content_description">more button</string>
+    <string name="switcher_schedule_title">Расписание</string>
+    <string name="switcher_notes_title">Заметки</string>
+    <string name="floating_action_button_desc">add schedule or note</string>
 </resources>
