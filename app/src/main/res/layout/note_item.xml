@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="24dp"
-    android:paddingTop="15dp"
-    android:paddingBottom="15dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     tools:context=".presentation.MainActivity">
 
 
@@ -27,7 +26,7 @@
             android:fontFamily="@font/nunito_regular"
             android:textSize="14sp"
             android:textColor="#FFFFFFFF"
-            android:layout_weight="1f"
+            android:layout_weight="1"
             android:text="TextView"
             tools:text="this morning's meeting, we have to improve the quality of office facilities and another..."/>
 
@@ -43,7 +42,7 @@
                 android:fontFamily="@font/nunito_regular"
                 android:textSize="10sp"
                 android:textColor="#FFFFFFFF"
-                android:layout_weight="1f"
+                android:layout_weight="1"
                 android:text="TextView"
                 tools:text="28/10/2012"
                 tools:ignore="SmallSp" />
