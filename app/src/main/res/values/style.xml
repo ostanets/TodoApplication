@@ -6,4 +6,19 @@
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/nunito_regular</item>
     </style>
+
+    <style name="AppNoteTitleView" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="AppNoteBodyView" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="lineHeight">18.4sp</item>
+        <item name="android:fontFamily">@font/nunito_regular</item>
+    </style>
 </resources>

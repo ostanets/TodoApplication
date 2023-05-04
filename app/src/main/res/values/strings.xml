@@ -10,4 +10,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pinned_status">pinned status</string>
     <string name="search">Поиск заметок</string>
+    <string name="button_back_content_description">go back button</string>
+    <string name="button_pin_content_description">pin note</string>
 </resources>
