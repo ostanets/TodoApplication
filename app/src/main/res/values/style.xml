@@ -31,4 +31,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">100dp</item>
     </style>
+
+    <style name="SwitcherActive" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/switcher_active</item>
+    </style>
+
+    <style name="SwitcherInactive" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/switcher_inactive</item>
+    </style>
 </resources>
