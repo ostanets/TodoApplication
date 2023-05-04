@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ostanets.todoapp.databinding.ActivityNoteBinding
 
 class NoteActivity : AppCompatActivity() {
-    lateinit var viewModel: NoteViewModel
-    lateinit var binding: ActivityNoteBinding
+    private lateinit var viewModel: NoteViewModel
+    private lateinit var binding: ActivityNoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

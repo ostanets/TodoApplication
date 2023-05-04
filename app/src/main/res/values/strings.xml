@@ -12,4 +12,8 @@
     <string name="search">Поиск заметок</string>
     <string name="button_back_content_description">go back button</string>
     <string name="button_pin_content_description">pin note</string>
+    <string name="add_note">Добавить заметку</string>
+    <string name="add_schedule">Добавить расписание</string>
+    <string name="title_hint">Название</string>
+    <string name="body_hint">Ваш текст</string>
 </resources>

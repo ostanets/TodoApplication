@@ -1,146 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/main_activity_background"
-    android:fitsSystemWindows="true"
-    tools:context=".presentation.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="190dp"
-        android:contentDescription="@null"
-        android:src="@drawable/main_activity_top_tint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="24dp"
-        android:background="#00FFFFFF"
-        android:contentInsetStart="0dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:contentInsetStart="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    </data>
 
-        <!-- Logo -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_activity_background"
+        android:fitsSystemWindows="true"
+        tools:context=".presentation.MainActivity">
+
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="120dp"
-            android:layout_height="24dp"
-            android:contentDescription="@string/logo_content_description"
-            android:src="@drawable/baseline_logo_24"
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="190dp"
+            android:contentDescription="@null"
+            android:src="@drawable/main_activity_top_tint"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Buttons -->
-
-        <ImageButton
-            android:id="@+id/button_more"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:layout_gravity="end"
-            android:contentDescription="@string/button_more_content_description"
-            android:src="@drawable/baseline_more_24" />
-
-        <ImageButton
-            android:id="@+id/button_notifications"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_toStartOf="@id/button_more"
-            android:background="@null"
-            android:layout_gravity="end"
-            android:contentDescription="@string/button_notifications_content_description"
-            android:src="@drawable/baseline_notifications_24" />
-
-    </com.google.android.material.appbar.MaterialToolbar>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/fragment_switcher"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/switch_to_schedule"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="140dp"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="2dp"
-            android:height="45dp"
-            android:backgroundTint="#272430"
-            android:fontFamily="@font/nunito_semibold"
-            android:minHeight="45dp"
-            android:text="@string/switcher_schedule_title"
-            android:textColor="#FFFFFFFF"
-            android:textSize="16sp"
-            app:cornerRadius="5dp" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="24dp"
+            android:background="#00FFFFFF"
+            android:contentInsetStart="0dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/switch_to_notes"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="140dp"
+            <!-- Logo -->
+            <ImageView
+                android:layout_marginStart="20dp"
+                android:id="@+id/logo"
+                android:layout_width="120dp"
+                android:layout_height="24dp"
+                android:contentDescription="@string/logo_content_description"
+                android:src="@drawable/baseline_logo_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Buttons -->
+
+            <ImageButton
+                android:id="@+id/button_more"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:background="@null"
+                android:contentDescription="@string/button_more_content_description"
+                android:src="@drawable/baseline_more_24"
+                tools:ignore="TouchTargetSizeCheck"
+                tools:layout_editor_absoluteX="323dp"
+                tools:layout_editor_absoluteY="7dp" />
+
+            <ImageButton
+                android:id="@+id/button_notifications"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toStartOf="@id/button_more"
+                android:background="@null"
+                android:layout_gravity="end"
+                android:contentDescription="@string/button_notifications_content_description"
+                android:src="@drawable/baseline_notifications_24" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/fragment_switcher"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/switch_to_schedule"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="2dp"
+                android:height="45dp"
+                android:backgroundTint="#272430"
+                android:fontFamily="@font/nunito_semibold"
+                android:minHeight="45dp"
+                android:text="@string/switcher_schedule_title"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp"
+                app:cornerRadius="5dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/switch_to_notes"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="2dp"
+                android:height="45dp"
+                android:backgroundTint="#00000000"
+                android:fontFamily="@font/nunito_semibold"
+                android:minHeight="45dp"
+                android:text="@string/switcher_notes_title"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp"
+                app:cornerRadius="5dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/main_frame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0">
+
+            <include layout="@layout/fragment_note_list" />
+
+        </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
+            android:backgroundTint="#CCC2FE"
+            android:id="@+id/main_fab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="2dp"
-            android:height="45dp"
-            android:backgroundTint="#00000000"
-            android:fontFamily="@font/nunito_semibold"
-            android:minHeight="45dp"
-            android:text="@string/switcher_notes_title"
-            android:textColor="#FFFFFFFF"
-            android:textSize="16sp"
-            app:cornerRadius="5dp" />
-    </LinearLayout>
+            app:fabCustomSize="50dp"
+            app:maxImageSize="20dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:contentDescription="@string/floating_action_button_desc"
+            android:focusable="true"
+            android:src="@drawable/baseline_add_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/main_frame"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/schedule_fab"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#CCC2FE"
+            android:clickable="true"
+            android:contentDescription="@string/floating_action_button_desc"
+            android:focusable="true"
+            android:scaleType="center"
+            android:src="@drawable/baseline_new_schedule_50"
+            app:fabCustomSize="55dp"
+            app:layout_constraintBottom_toTopOf="@+id/main_fab"
+            app:layout_constraintEnd_toEndOf="@+id/main_fab"
+            app:layout_constraintStart_toStartOf="@+id/main_fab"
+            app:maxImageSize="25dp"
+            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt" />
 
-        <include layout="@layout/fragment_note_list" />
+        <TextView
+            style="@style/AppNoteFABDescription"
+            android:textSize="18sp"
+            android:id="@+id/schedule_textView"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_schedule"
+            app:layout_constraintBottom_toBottomOf="@+id/schedule_fab"
+            app:layout_constraintEnd_toStartOf="@+id/schedule_fab"
+            app:layout_constraintTop_toTopOf="@+id/schedule_fab" />
 
-    </FrameLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/note_fab"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#CCC2FE"
+            android:clickable="true"
+            android:contentDescription="@string/floating_action_button_desc"
+            android:focusable="true"
+            android:scaleType="center"
+            android:src="@drawable/baseline_new_note_50"
+            app:fabCustomSize="55dp"
+            app:layout_constraintBottom_toTopOf="@+id/schedule_fab"
+            app:layout_constraintEnd_toEndOf="@+id/main_fab"
+            app:layout_constraintStart_toStartOf="@+id/main_fab"
+            app:maxImageSize="25dp"
+            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:clickable="true"
-        android:contentDescription="@string/floating_action_button_desc"
-        android:focusable="true"
-        android:src="@drawable/baseline_add_50"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            style="@style/AppNoteFABDescription"
+            android:textSize="18sp"
+            android:id="@+id/note_textView"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_note"
+            app:layout_constraintBottom_toBottomOf="@+id/note_fab"
+            app:layout_constraintEnd_toStartOf="@+id/note_fab"
+            app:layout_constraintTop_toTopOf="@+id/note_fab" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -21,4 +21,14 @@
         <item name="lineHeight">18.4sp</item>
         <item name="android:fontFamily">@font/nunito_regular</item>
     </style>
+
+    <style name="AppNoteFABDescription" parent="">
+        <item name="android:textColor">#FFD6CEFF</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+    </style>
+
+    <style name="FloatingActionButtonExt" parent="ShapeAppearanceOverlay.Material3.FloatingActionButton">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">100dp</item>
+    </style>
 </resources>
