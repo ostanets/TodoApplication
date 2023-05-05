@@ -140,6 +140,20 @@
 
         </FrameLayout>
 
+        <LinearLayout
+            android:id="@+id/background_tint_for_fab"
+            android:visibility="gone"
+            android:clickable="true"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#CD0A0A23"
+            android:focusable="true" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
             android:backgroundTint="#CCC2FE"
