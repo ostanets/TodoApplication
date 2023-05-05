@@ -1,10 +1,10 @@
 package com.ostanets.todoapp.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +32,17 @@ class NoteListFragment : Fragment() {
 
         setupRecycleView()
 
+        binding.svNoteList.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                notesListAdapter.filter.filter(newText)
+                return true
+            }
+        })
+
         return binding.root
     }
 
@@ -39,8 +50,7 @@ class NoteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.notesList.observe(viewLifecycleOwner) {
-            notesListAdapter.submitList(it)
-            Log.d("NoteListFragment", "onViewCreated: $it")
+            notesListAdapter.submitNoteList(it)
         }
     }
 
