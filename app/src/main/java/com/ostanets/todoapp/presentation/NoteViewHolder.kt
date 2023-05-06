@@ -18,4 +18,8 @@ class NoteViewHolder(private val binding: NoteItemBinding) : ViewHolder(binding.
     fun setDate(date: LocalDate) {
         binding.date = formatter.format(date)
     }
+
+    fun setPinned(status: Boolean) {
+        binding.pinnedIcon.visibility = if (status) View.VISIBLE else View.GONE
+    }
 }

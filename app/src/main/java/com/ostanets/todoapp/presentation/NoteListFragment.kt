@@ -38,7 +38,7 @@ class NoteListFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                notesListAdapter.filter.filter(newText)
+                notesListAdapter.getFilter().filter(newText)
                 return true
             }
         })
@@ -57,6 +57,7 @@ class NoteListFragment : Fragment() {
     private fun setupRecycleView() {
         val rvNoteList = binding.rvNoteList
         notesListAdapter = NotesListAdapter()
+
         with(rvNoteList) {
             layoutManager = LinearLayoutManager(binding.root.context)
             adapter = notesListAdapter
@@ -64,6 +65,15 @@ class NoteListFragment : Fragment() {
                 DEFAULT_TYPE,
                 NotesListAdapter.MAX_POOL_SIZE
             )
+        }
+
+        notesListAdapter.onNoteClickListener = {
+            val intent = if (it.id != null) {
+                NoteActivity.newIntentEditNote(binding.root.context, it.id)
+            } else {
+                NoteActivity.newIntentAddNote(binding.root.context)
+            }
+            startActivity(intent)
         }
     }
 

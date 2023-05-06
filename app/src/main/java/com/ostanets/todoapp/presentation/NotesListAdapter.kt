@@ -3,12 +3,11 @@ package com.ostanets.todoapp.presentation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import com.ostanets.todoapp.databinding.NoteItemBinding
 import com.ostanets.todoapp.models.Note
 
-class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()), Filterable {
+class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()) {
     var onNoteLongClickListener: ((Note) -> Unit)? = null
     var onNoteClickListener: ((Note) -> Unit)? = null
 
@@ -16,7 +15,10 @@ class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()), 
 
     fun submitNoteList(notes: List<Note> ) {
         notesList.clear()
-        notesList.addAll(notes)
+        notesList.addAll(notes
+            .sortedWith(compareByDescending<Note> { it.pinned }
+                .thenByDescending { it.date }
+            ))
         submitList(notesList)
     }
 
@@ -25,14 +27,20 @@ class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()), 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        val binding = NoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = NoteItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return NoteViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = getItem(position)
+
         holder.setBody(note.body)
         holder.setDate(note.date)
+        holder.setPinned(note.pinned)
 
         holder.view.setOnLongClickListener {
             onNoteLongClickListener?.invoke(note)
@@ -44,7 +52,7 @@ class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()), 
         }
     }
 
-    override fun getFilter(): Filter {
+    fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val query = constraint?.toString() ?: ""

@@ -1,10 +1,12 @@
 package com.ostanets.todoapp.domain
 
 import com.ostanets.todoapp.models.Note
+import java.lang.RuntimeException
 
 class EditNoteUseCase(private val noteRepository: NoteRepository) {
 
     suspend fun editNote(note: Note) {
-        note.id?.let { noteRepository.editNote(it, note.title, note.body, note.pinned, note.date) }
+        val id = note.id ?: throw RuntimeException("Undefined id")
+        noteRepository.editNote(id, note.title, note.body, note.pinned, note.date)
     }
 }

@@ -18,9 +18,12 @@ data class Note(
     val pinned: Boolean,
 
     @ColumnInfo(name = "date")
-    val date: LocalDate
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Long? = null
-}
+    val date: LocalDate,
 
+    @PrimaryKey(autoGenerate = true)
+    val id: Long? = null
+) {
+    companion object {
+        const val UNDEFINED_ID = -1L
+    }
+}
