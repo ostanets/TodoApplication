@@ -32,6 +32,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     val currentNote: LiveData<Note>
         get() = _currentNote
 
+    private var _pinned = MutableLiveData(false)
+    val pinned: LiveData<Boolean>
+        get() = _pinned
+
     private var getNoteUseCase = GetNoteUseCase(repository)
     private var addNoteUseCase = AddNoteUseCase(repository)
     private var editNoteUseCase = EditNoteUseCase(repository)
@@ -41,9 +45,19 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         _shouldCloseScreen.value = Unit
     }
 
-    fun getNote(noteId: Long)  = viewModelScope.launch {
-        _currentNote.value = getNoteUseCase.getNote(noteId)
+    fun getNote(noteId: Long) = viewModelScope.launch {
+        val note = getNoteUseCase.getNote(noteId)
+        _currentNote.value = note
+        _pinned.value = note.pinned
     }
+
+    fun toggleNotePinnedStatus() {
+        _pinned.value ?: throw RuntimeException(
+            "Cannot toggle note pinned status.Status is undefined."
+        )
+        _pinned.value = !_pinned.value!!
+    }
+
     fun saveNote(inputTitle: String?, inputBody: String?) {
         val title = parseInput(inputTitle)
         val body = parseInput(inputBody)
@@ -56,15 +70,18 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun createNote(title: String, body: String) = viewModelScope.launch {
-        addNoteUseCase.addNote(Note(title, body, false, LocalDate.now()))
+        _pinned.value ?: throw RuntimeException("Cannot create note. Pinned status is undefined.")
+        addNoteUseCase.addNote(Note(title, body, _pinned.value!!, LocalDate.now()))
     }
 
     private fun editNote(title: String, body: String) = viewModelScope.launch {
         currentNote.value ?: throw RuntimeException("Cannot edit note. Current note is empty.")
+        _pinned.value ?: throw RuntimeException("Cannot edit note. Pinned status is undefined.")
         editNoteUseCase.editNote(
             currentNote.value!!.copy(
                 title = title,
                 body = body,
+                pinned = _pinned.value!!,
                 date = LocalDate.now()
             )
         )
