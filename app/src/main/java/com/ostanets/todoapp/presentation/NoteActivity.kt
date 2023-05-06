@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.ostanets.todoapp.R
 import com.ostanets.todoapp.databinding.ActivityNoteBinding
 import com.ostanets.todoapp.models.Note
 
@@ -18,7 +19,9 @@ class NoteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         parseIntent()
+
         window.clearFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         viewModel = ViewModelProvider(this)[NoteViewModel::class.java]
@@ -30,6 +33,10 @@ class NoteActivity : AppCompatActivity() {
             MODE_ADD -> launchAddMode()
         }
 
+        initFinish()
+    }
+
+    private fun initFinish() {
         viewModel.shouldCloseScreen.observe(this) {
             finish()
         }
@@ -47,8 +54,22 @@ class NoteActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    private fun launchAddMode() {
+    private fun setupPinButton() {
+        viewModel.pinned.observe(this) { status ->
+            if (status) {
+                binding.buttonPin.setImageResource(R.drawable.baseline_thumbtack_24)
+            } else {
+                binding.buttonPin.setImageResource(R.drawable.baseline_thumbtack_inactive_24)
+            }
+        }
 
+        binding.buttonPin.setOnClickListener {
+            viewModel.toggleNotePinnedStatus()
+        }
+    }
+
+    private fun launchAddMode() {
+        setupPinButton()
     }
 
     private fun launchEditMode() {
@@ -57,6 +78,8 @@ class NoteActivity : AppCompatActivity() {
             binding.title = it.title
             binding.body = it.body
         }
+
+        setupPinButton()
     }
 
     private fun parseIntent() {
