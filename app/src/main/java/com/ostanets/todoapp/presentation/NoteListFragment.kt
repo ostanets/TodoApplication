@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ostanets.todoapp.databinding.FragmentNoteListBinding
+import com.ostanets.todoapp.models.Note
 import com.ostanets.todoapp.presentation.NotesListAdapter.Companion.DEFAULT_TYPE
 
 class NoteListFragment : Fragment() {
@@ -30,6 +31,16 @@ class NoteListFragment : Fragment() {
             factory
         )[MainViewModel::class.java]
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.notesList.observe(viewLifecycleOwner) { note ->
+            notesListAdapter.submitList(sortNotesList(note))
+        }
+
         setupRecycleView()
 
         binding.svNoteList.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -38,21 +49,17 @@ class NoteListFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                notesListAdapter.getFilter().filter(newText)
+//                notesListAdapter.getFilter().filter(newText)
                 return true
             }
         })
-
-        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun sortNotesList(note: List<Note>) =
+        note.sortedWith(compareByDescending<Note> { it.pinned }
+            .thenByDescending { it.date }
+        )
 
-        viewModel.notesList.observe(viewLifecycleOwner) {
-            notesListAdapter.submitNoteList(it)
-        }
-    }
 
     private fun setupRecycleView() {
         val rvNoteList = binding.rvNoteList
