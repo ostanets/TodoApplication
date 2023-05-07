@@ -16,6 +16,7 @@ class NoteListFragment : Fragment() {
     private lateinit var binding: FragmentNoteListBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var notesListAdapter: NotesListAdapter
+    private lateinit var notesList: List<Note>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +38,9 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.notesList.observe(viewLifecycleOwner) { note ->
-            notesListAdapter.submitList(sortNotesList(note))
+        viewModel.notesList.observe(viewLifecycleOwner) { notes ->
+            notesList = notes
+            notesListAdapter.submitList(sortNotesList(notes))
         }
 
         setupRecycleView()
@@ -49,7 +51,8 @@ class NoteListFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                notesListAdapter.getFilter().filter(newText)
+                val filteredNotesList = filterNotesList(newText)
+                notesListAdapter.submitList(sortNotesList(filteredNotesList))
                 return true
             }
         })
@@ -59,6 +62,21 @@ class NoteListFragment : Fragment() {
         note.sortedWith(compareByDescending<Note> { it.pinned }
             .thenByDescending { it.date }
         )
+
+    private fun filterNotesList(text: String?): List<Note> {
+        val filteredList = ArrayList<Note>()
+
+        if (text.isNullOrBlank()) return notesList
+
+        for (item in notesList) {
+            if (item.title.lowercase().contains(text.lowercase()) ||
+                item.body.lowercase().contains(text.lowercase())) {
+                filteredList.add(item)
+            }
+        }
+
+        return filteredList
+    }
 
 
     private fun setupRecycleView() {
