@@ -16,7 +16,7 @@ class NoteListFragment : Fragment() {
     private lateinit var binding: FragmentNoteListBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var notesListAdapter: NotesListAdapter
-    private lateinit var notesList: List<Note>
+    private var notesList = ArrayList<Note>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +38,6 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.notesList.observe(viewLifecycleOwner) { notes ->
-            notesList = notes
-            notesListAdapter.submitList(sortNotesList(notes))
-        }
-
         setupRecycleView()
 
         binding.svNoteList.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -56,6 +51,14 @@ class NoteListFragment : Fragment() {
                 return true
             }
         })
+    }
+
+    override fun onResume() {
+        viewModel.notesList.observe(viewLifecycleOwner) { notes ->
+            notesList = notes as ArrayList<Note>
+            notesListAdapter.submitList(sortNotesList(notes))
+        }
+        super.onResume()
     }
 
     private fun sortNotesList(note: List<Note>) =

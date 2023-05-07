@@ -26,7 +26,9 @@ class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()) {
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = getItem(position)
 
-        holder.setBody(note.body)
+        if (note.body.isEmpty()) holder.setBody(note.title)
+        else holder.setBody(note.body)
+
         holder.setDate(note.date)
         holder.setPinned(note.pinned)
 

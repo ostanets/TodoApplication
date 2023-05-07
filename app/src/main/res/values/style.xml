@@ -22,8 +22,15 @@
         <item name="android:fontFamily">@font/nunito_regular</item>
     </style>
 
-    <style name="AppNoteFABDescription" parent="">
-        <item name="android:textColor">#FFD6CEFF</item>
+    <style name="AppNoteBodyTruncated" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">14.4sp</item>
+        <item name="android:fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="AppNoteFABDescription" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontFamily">@font/nunito_semibold</item>
     </style>
 

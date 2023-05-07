@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.ostanets.todoapp.models.Note
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 @Dao
 interface NoteRepository {
@@ -21,7 +21,7 @@ interface NoteRepository {
     suspend fun addNote(note: Note)
 
     @Query("UPDATE `notes` SET title = :title, body = :body, pinned = :pinned, date = :date WHERE id = :id")
-    suspend fun editNote(id: Long, title: String, body: String, pinned: Boolean, date: LocalDate)
+    suspend fun editNote(id: Long, title: String, body: String, pinned: Boolean, date: LocalDateTime)
 
     @Query("DELETE FROM `notes` WHERE id = :noteId")
     suspend fun deleteNote(noteId: Long)

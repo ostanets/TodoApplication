@@ -1,17 +1,17 @@
 package com.ostanets.todoapp.models
 
 import androidx.room.TypeConverter
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 class LocalDateConverter {
 
     @TypeConverter
-    fun fromString(value: String?): LocalDate? {
-        return value?.let { LocalDate.parse(it) }
+    fun fromString(value: String?): LocalDateTime? {
+        return value?.let { LocalDateTime.parse(it) }
     }
 
     @TypeConverter
-    fun toString(date: LocalDate?): String? {
+    fun toString(date: LocalDateTime?): String? {
         return date?.toString()
     }
 }

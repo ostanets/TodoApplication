@@ -24,7 +24,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="105dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/note_item_background"
             android:orientation="vertical"
             android:padding="15dp"
@@ -33,14 +33,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tw_note_title"
+                android:id="@+id/tw_note_body"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/nunito_regular"
+                style="@style/AppNoteBodyTruncated"
                 android:text="@{body}"
                 android:textColor="#FFFFFFFF"
-                android:textSize="14sp"
+                android:lines="3"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:layout_marginBottom="8dp"
                 tools:text="this morning's meeting, we have to improve the quality of office facilities and another..." />
 
             <LinearLayout

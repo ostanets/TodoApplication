@@ -13,7 +13,7 @@ import com.ostanets.todoapp.domain.GetNoteUseCase
 import com.ostanets.todoapp.domain.NoteRepository
 import com.ostanets.todoapp.models.Note
 import kotlinx.coroutines.launch
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -71,7 +71,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun createNote(title: String, body: String) = viewModelScope.launch {
         _pinned.value ?: throw RuntimeException("Cannot create note. Pinned status is undefined.")
-        addNoteUseCase.addNote(Note(title, body, _pinned.value!!, LocalDate.now()))
+        addNoteUseCase.addNote(Note(title, body, _pinned.value!!, LocalDateTime.now()))
     }
 
     private fun editNote(title: String, body: String) = viewModelScope.launch {
@@ -82,7 +82,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
                 title = title,
                 body = body,
                 pinned = _pinned.value!!,
-                date = LocalDate.now()
+                date = LocalDateTime.now()
             )
         )
     }

@@ -3,7 +3,7 @@ package com.ostanets.todoapp.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 
 @Entity(tableName = "notes")
@@ -18,7 +18,7 @@ data class Note(
     val pinned: Boolean,
 
     @ColumnInfo(name = "date")
-    val date: LocalDate,
+    val date: LocalDateTime,
 
     @PrimaryKey(autoGenerate = true)
     val id: Long? = null
