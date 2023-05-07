@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Todo Application</string>
     <string name="logo_content_description">ontime application logo</string>
-    <string name="button_notifications_content_description">notifications button</string>
-    <string name="button_more_content_description">more button</string>
+    <string name="button_notifications_content_description">notifications</string>
+    <string name="button_more_content_description">more</string>
     <string name="switcher_schedule_title">Расписание</string>
     <string name="switcher_notes_title">Заметки</string>
     <string name="floating_action_button_desc">add schedule or note</string>
@@ -16,4 +16,6 @@
     <string name="add_schedule">Добавить расписание</string>
     <string name="title_hint">Название</string>
     <string name="body_hint">Ваш текст</string>
+    <string name="floating_action_button_schedule_desc">add schedule</string>
+    <string name="floating_action_button_note_desc">add note</string>
 </resources>

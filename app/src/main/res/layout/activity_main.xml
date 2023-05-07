@@ -139,17 +139,17 @@
 
         <LinearLayout
             android:id="@+id/background_tint_for_fab"
-            android:visibility="gone"
-            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="#E60A0A23"
+            android:clickable="true"
+            android:focusable="true"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#CD0A0A23"
-            android:focusable="true" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
@@ -170,65 +170,71 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/schedule_fab"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:backgroundTint="#CCC2FE"
             android:clickable="true"
-            android:contentDescription="@string/floating_action_button_desc"
+            android:contentDescription="@string/floating_action_button_schedule_desc"
             android:focusable="true"
             android:scaleType="center"
             android:src="@drawable/baseline_new_schedule_50"
-            app:fabCustomSize="55dp"
+            android:visibility="gone"
+            app:fabCustomSize="45dp"
             app:layout_constraintBottom_toTopOf="@+id/main_fab"
             app:layout_constraintEnd_toEndOf="@+id/main_fab"
             app:layout_constraintStart_toStartOf="@+id/main_fab"
-            app:maxImageSize="25dp"
-            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt" />
+            app:maxImageSize="20dp"
+            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
+            tools:visibility="visible" />
 
         <TextView
-            style="@style/AppNoteFABDescription"
-            android:textSize="18sp"
             android:id="@+id/schedule_textView"
-            android:visibility="gone"
+            style="@style/AppNoteFABDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="@string/add_schedule"
+            android:textSize="18sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/schedule_fab"
             app:layout_constraintEnd_toStartOf="@+id/schedule_fab"
-            app:layout_constraintTop_toTopOf="@+id/schedule_fab" />
+            app:layout_constraintTop_toTopOf="@+id/schedule_fab"
+            tools:visibility="visible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/note_fab"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:backgroundTint="#CCC2FE"
             android:clickable="true"
-            android:contentDescription="@string/floating_action_button_desc"
+            android:contentDescription="@string/floating_action_button_note_desc"
             android:focusable="true"
             android:scaleType="center"
             android:src="@drawable/baseline_new_note_50"
-            app:fabCustomSize="55dp"
+            android:visibility="gone"
+            app:fabCustomSize="45dp"
             app:layout_constraintBottom_toTopOf="@+id/schedule_fab"
             app:layout_constraintEnd_toEndOf="@+id/main_fab"
             app:layout_constraintStart_toStartOf="@+id/main_fab"
-            app:maxImageSize="25dp"
-            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt" />
+            app:maxImageSize="20dp"
+            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
+            tools:visibility="visible" />
 
         <TextView
-            style="@style/AppNoteFABDescription"
-            android:textSize="18sp"
             android:id="@+id/note_textView"
-            android:visibility="gone"
+            style="@style/AppNoteFABDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="@string/add_note"
+            android:textSize="18sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/note_fab"
             app:layout_constraintEnd_toStartOf="@+id/note_fab"
-            app:layout_constraintTop_toTopOf="@+id/note_fab" />
+            app:layout_constraintTop_toTopOf="@+id/note_fab"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
