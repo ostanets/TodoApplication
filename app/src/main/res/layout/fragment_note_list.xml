@@ -9,8 +9,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         tools:context=".presentation.NoteListFragment"
         tools:showIn="@layout/activity_main">
 
@@ -24,7 +22,9 @@
                 android:id="@+id/sv_note_list"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/search_background"
                 android:iconifiedByDefault="false"
                 android:orientation="vertical"

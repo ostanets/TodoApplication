@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ostanets.todoapp.databinding.FragmentNoteListBinding
 import com.ostanets.todoapp.models.Note
 import com.ostanets.todoapp.presentation.NotesListAdapter.Companion.DEFAULT_TYPE
@@ -95,6 +97,39 @@ class NoteListFragment : Fragment() {
             )
         }
 
+        setupNoteClickListener()
+        setupNoteLongClickListener()
+        setupNoteSwipeListener(rvNoteList)
+    }
+
+    private fun setupNoteSwipeListener(rvNotesList: RecyclerView?) {
+        val callback = object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.deleteNote(notesListAdapter.currentList[viewHolder.adapterPosition])
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(rvNotesList)
+    }
+
+    private fun setupNoteLongClickListener() {
+        notesListAdapter.onNoteLongClickListener = {
+            viewModel.togglePinStatus(it)
+        }
+    }
+
+    private fun setupNoteClickListener() {
         notesListAdapter.onNoteClickListener = {
             val intent = if (it.id != null) {
                 NoteActivity.newIntentEditNote(binding.root.context, it.id)

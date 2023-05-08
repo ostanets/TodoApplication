@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         tools:context=".presentation.MainActivity">
 
 
