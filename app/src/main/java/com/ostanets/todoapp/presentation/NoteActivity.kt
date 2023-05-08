@@ -59,9 +59,15 @@ class NoteActivity : AppCompatActivity() {
             }
 
             R.id.action_share -> {
+                val message = if (title.isNotBlank() && body.isNotBlank()) {
+                    "$title\n$body"
+                } else {
+                    title.ifBlank { body }
+                }
+
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, body)
+                    putExtra(Intent.EXTRA_TEXT, message)
                     type = "text/plain"
                 }
 
