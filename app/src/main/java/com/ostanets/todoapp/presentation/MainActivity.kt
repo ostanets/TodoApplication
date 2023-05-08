@@ -13,7 +13,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.ostanets.todoapp.R
 import com.ostanets.todoapp.data.TodoAppDatabase
 import com.ostanets.todoapp.databinding.ActivityMainBinding
-import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -76,7 +75,6 @@ class MainActivity : AppCompatActivity() {
 
         setupSwitcher()
         setupFABs()
-
     }
 
     private fun setupSwitcher() {

@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.ostanets.todoapp.R
 import com.ostanets.todoapp.databinding.FragmentNoteListBinding
 import com.ostanets.todoapp.models.Note
 import com.ostanets.todoapp.presentation.NotesListAdapter.Companion.DEFAULT_TYPE
@@ -116,12 +118,35 @@ class NoteListFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                viewModel.deleteNote(notesListAdapter.currentList[viewHolder.adapterPosition])
+                val swipedPosition = viewHolder.adapterPosition
+                val swipedItem = notesListAdapter.currentList[swipedPosition]
+
+                val alertDialog = setupAlertDialog(swipedItem, swipedPosition)
+
+                alertDialog.show()
             }
         }
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(rvNotesList)
     }
+
+    private fun setupAlertDialog(
+        swipedItem: Note,
+        swipedPosition: Int
+    ) = MaterialAlertDialogBuilder(requireContext())
+        .setTitle(resources.getString(R.string.confirm_deletion_title))
+        .setMessage(resources.getString(R.string.confirm_deletion_description))
+        .setPositiveButton(
+            resources.getString(R.string.confirm_deletion_accept)
+        ) { _, _ ->
+            viewModel.deleteNote(swipedItem)
+        }
+        .setNegativeButton(
+            resources.getString(R.string.confirm_deletion_decline)
+        ) { _, _ ->
+            notesListAdapter.notifyItemChanged(swipedPosition)
+        }
+        .create()
 
     private fun setupNoteLongClickListener() {
         notesListAdapter.onNoteLongClickListener = {
