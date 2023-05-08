@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Todo Application</string>
+    <string name="app_name">On.Time</string>
     <string name="logo_content_description">ontime application logo</string>
     <string name="button_notifications_content_description">notifications</string>
     <string name="button_more_content_description">more</string>
