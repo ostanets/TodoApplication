@@ -23,9 +23,8 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         repository = TodoAppDatabase.getDatabase(application).getNoteDao()
     }
 
-    private val _shouldCloseScreen = MutableLiveData<Unit>()
-
-    val shouldCloseScreen: LiveData<Unit>
+    private val _shouldCloseScreen = MutableLiveData<Int>()
+    val shouldCloseScreen: LiveData<Int>
         get() = _shouldCloseScreen
 
     private var _currentNote = MutableLiveData<Note>()
@@ -41,8 +40,8 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private var editNoteUseCase = EditNoteUseCase(repository)
     private var deleteNoteUseCase = DeleteNoteUseCase(repository)
 
-    fun finishWork() {
-        _shouldCloseScreen.value = Unit
+    fun finishWork(mode: Int) {
+        _shouldCloseScreen.value = mode
     }
 
     fun getNote(noteId: Long) = viewModelScope.launch {
@@ -64,14 +63,28 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         if (_currentNote.value == null) {
             if (isValidNote(title, body)) createNote(title, body)
         } else {
-            if (isValidNote(title, body)) editNote(title, body)
-            else deleteNote()
+            if (isValidNote(title, body)) {
+                editNote(title, body)
+            }
+            else {
+                deleteNote()
+                finishWork(EXIT_WITHOUT_SAVE_CHANGES)
+            }
         }
+    }
+
+    fun manualDeleteNote() = viewModelScope.launch {
+        currentNote.value?.id?.let { deleteNoteUseCase.deleteNote(it) }
+        finishWork(EXIT_WITHOUT_SAVE_CHANGES)
     }
 
     private fun createNote(title: String, body: String) = viewModelScope.launch {
         _pinned.value ?: throw RuntimeException("Cannot create note. Pinned status is undefined.")
-        addNoteUseCase.addNote(Note(title, body, _pinned.value!!, LocalDateTime.now()))
+        val insertedId = addNoteUseCase.addNote(
+            Note(title, body, _pinned.value!!, LocalDateTime.now())
+        )
+
+        getNote(insertedId)
     }
 
     private fun editNote(title: String, body: String) = viewModelScope.launch {
@@ -99,5 +112,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun isValidNote(title: String, body: String): Boolean {
         return !(title.isEmpty() && body.isEmpty())
+    }
+
+    companion object {
+        const val EXIT_SAVE_CHANGES = 100
+        const val EXIT_WITHOUT_SAVE_CHANGES = 101
     }
 }

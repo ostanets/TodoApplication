@@ -58,11 +58,13 @@ class NoteListFragment : Fragment() {
     }
 
     override fun onResume() {
+        super.onResume()
         viewModel.notesList.observe(viewLifecycleOwner) { notes ->
             notesList = notes as ArrayList<Note>
             notesListAdapter.submitList(sortNotesList(notes))
         }
-        super.onResume()
+        binding.svNoteList.setQuery("", false)
+        binding.rootLayout.requestFocus()
     }
 
     private fun sortNotesList(note: List<Note>) =
@@ -122,7 +124,6 @@ class NoteListFragment : Fragment() {
                 val swipedItem = notesListAdapter.currentList[swipedPosition]
 
                 val alertDialog = setupAlertDialog(swipedItem, swipedPosition)
-
                 alertDialog.show()
             }
         }

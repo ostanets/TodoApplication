@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ostanets.todoapp.R
 import com.ostanets.todoapp.databinding.ActivityNoteBinding
 import com.ostanets.todoapp.models.Note
@@ -18,6 +19,7 @@ class NoteActivity : AppCompatActivity() {
     private lateinit var viewModel: NoteViewModel
     private lateinit var binding: ActivityNoteBinding
 
+    private var exitMode = NoteViewModel.EXIT_SAVE_CHANGES
     private var screenMode = MODE_UNKNOWN
     private var noteId = Note.UNDEFINED_ID
 
@@ -27,7 +29,8 @@ class NoteActivity : AppCompatActivity() {
         parseIntent()
 
         window.clearFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         viewModel = ViewModelProvider(this)[NoteViewModel::class.java]
         binding = ActivityNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,7 +41,6 @@ class NoteActivity : AppCompatActivity() {
         }
 
         initFinish()
-
         setupButtonMore()
     }
 
@@ -48,22 +50,52 @@ class NoteActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val title = binding.etTitle.text.toString()
+        val body = binding.etBody.text.toString()
         return when (item.itemId) {
             R.id.action_save -> {
-                // Handle settings click
+                viewModel.saveNote(title, body)
                 true
             }
+
             R.id.action_share -> {
-                // Handle help click
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, body)
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
                 true
             }
+
             R.id.action_delete -> {
-                // Handle help click
+                if (title.isNotBlank() || body.isNotBlank()) {
+                    val alertDialog = setupAlertDialog()
+                    alertDialog.show()
+                } else {
+                    viewModel.manualDeleteNote()
+                }
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun setupAlertDialog() = MaterialAlertDialogBuilder(binding.root.context)
+        .setTitle(resources.getString(R.string.confirm_deletion_title))
+        .setMessage(resources.getString(R.string.confirm_deletion_description))
+        .setPositiveButton(
+            resources.getString(R.string.confirm_deletion_accept)
+        ) { _, _ ->
+            viewModel.manualDeleteNote()
+        }
+        .setNegativeButton(
+            resources.getString(R.string.confirm_deletion_decline)
+        ) {_, _ -> }
+        .create()
 
     private fun setupButtonMore() {
         binding.buttonMore.setOnClickListener {
@@ -84,19 +116,23 @@ class NoteActivity : AppCompatActivity() {
 
     private fun initFinish() {
         viewModel.shouldCloseScreen.observe(this) {
+            exitMode = it
             finish()
         }
 
         binding.btnBack.setOnClickListener {
-            viewModel.finishWork()
+            viewModel.finishWork(NoteViewModel.EXIT_SAVE_CHANGES)
         }
     }
 
     override fun onStop() {
-        viewModel.saveNote(
-            binding.etTitle.text.toString(),
-            binding.etBody.text.toString()
-        )
+        if (exitMode == NoteViewModel.EXIT_SAVE_CHANGES) {
+            viewModel.saveNote(
+                binding.etTitle.text.toString(),
+                binding.etBody.text.toString()
+            )
+        }
+
         super.onStop()
     }
 

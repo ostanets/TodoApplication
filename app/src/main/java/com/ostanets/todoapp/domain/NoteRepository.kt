@@ -18,7 +18,7 @@ interface NoteRepository {
     suspend fun getNote(noteId: Long): Note
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addNote(note: Note)
+    suspend fun addNote(note: Note): Long
 
     @Query("UPDATE `notes` SET title = :title, body = :body, pinned = :pinned, date = :date WHERE id = :id")
     suspend fun editNote(id: Long, title: String, body: String, pinned: Boolean, date: LocalDateTime)
