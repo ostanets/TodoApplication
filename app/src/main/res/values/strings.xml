@@ -18,4 +18,7 @@
     <string name="body_hint">Ваш текст</string>
     <string name="floating_action_button_schedule_desc">add schedule</string>
     <string name="floating_action_button_note_desc">add note</string>
+    <string name="menu_save">Сохранить</string>
+    <string name="menu_share">Поделиться</string>
+    <string name="menu_delete">Удалить</string>
 </resources>

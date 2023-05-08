@@ -42,10 +42,10 @@
 
             <!-- Logo -->
             <ImageView
-                android:layout_marginStart="20dp"
                 android:id="@+id/logo"
                 android:layout_width="120dp"
                 android:layout_height="24dp"
+                android:layout_marginStart="20dp"
                 android:contentDescription="@string/logo_content_description"
                 android:src="@drawable/baseline_logo_24"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,9 +70,9 @@
                 android:id="@+id/button_notifications"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_gravity="end"
                 android:layout_toStartOf="@id/button_more"
                 android:background="@null"
-                android:layout_gravity="end"
                 android:contentDescription="@string/button_notifications_content_description"
                 android:src="@drawable/baseline_notifications_24" />
 
@@ -134,8 +134,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.0">
-        </FrameLayout>
+            app:layout_constraintVertical_bias="0.0" />
 
         <LinearLayout
             android:id="@+id/background_tint_for_fab"
@@ -152,21 +151,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
-            android:backgroundTint="#CCC2FE"
             android:id="@+id/main_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fabCustomSize="50dp"
-            app:maxImageSize="20dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
+            android:backgroundTint="#CCC2FE"
             android:clickable="true"
             android:contentDescription="@string/floating_action_button_desc"
             android:focusable="true"
             android:src="@drawable/baseline_add_50"
+            app:fabCustomSize="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="20dp"
+            app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
+            app:tint="#000000" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/schedule_fab"
@@ -186,6 +186,7 @@
             app:layout_constraintStart_toStartOf="@+id/main_fab"
             app:maxImageSize="20dp"
             app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
+            app:tint="#000000"
             tools:visibility="visible" />
 
         <TextView
@@ -220,6 +221,7 @@
             app:layout_constraintStart_toStartOf="@+id/main_fab"
             app:maxImageSize="20dp"
             app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
+            app:tint="#000000"
             tools:visibility="visible" />
 
         <TextView

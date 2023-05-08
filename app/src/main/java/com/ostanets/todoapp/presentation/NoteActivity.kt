@@ -3,8 +3,12 @@ package com.ostanets.todoapp.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.ViewModelProvider
 import com.ostanets.todoapp.R
 import com.ostanets.todoapp.databinding.ActivityNoteBinding
@@ -34,6 +38,48 @@ class NoteActivity : AppCompatActivity() {
         }
 
         initFinish()
+
+        setupButtonMore()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.note_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_save -> {
+                // Handle settings click
+                true
+            }
+            R.id.action_share -> {
+                // Handle help click
+                true
+            }
+            R.id.action_delete -> {
+                // Handle help click
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setupButtonMore() {
+        binding.buttonMore.setOnClickListener {
+            showMenu(it)
+        }
+    }
+
+    private fun showMenu(view: View) {
+        val popup = PopupMenu(this, view)
+        popup.setOnMenuItemClickListener { item ->
+            onOptionsItemSelected(item)
+        }
+        popup.inflate(R.menu.note_menu)
+
+        popup.setForceShowIcon(true)
+        popup.show()
     }
 
     private fun initFinish() {
