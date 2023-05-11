@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ostanets.todoapp.R
 import com.ostanets.todoapp.databinding.ActivityNoteBinding
-import com.ostanets.todoapp.models.Note
+import com.ostanets.todoapp.domain.Note
 
 class NoteActivity : AppCompatActivity() {
     private lateinit var viewModel: NoteViewModel

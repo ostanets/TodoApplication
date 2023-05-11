@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ostanets.todoapp.R
 import com.ostanets.todoapp.databinding.FragmentNoteListBinding
-import com.ostanets.todoapp.models.Note
+import com.ostanets.todoapp.domain.Note
 import com.ostanets.todoapp.presentation.NotesListAdapter.Companion.DEFAULT_TYPE
 
 class NoteListFragment : Fragment() {

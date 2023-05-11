@@ -5,15 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.ostanets.todoapp.domain.NoteRepository
-import com.ostanets.todoapp.models.LocalDateConverter
-import com.ostanets.todoapp.models.Note
 
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 @TypeConverters(LocalDateConverter::class)
 abstract class TodoAppDatabase : RoomDatabase() {
 
-    abstract fun getNoteDao(): NoteRepository
+    abstract fun getNoteDao(): NoteDao
 
     companion object {
 

@@ -6,25 +6,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ostanets.todoapp.data.TodoAppDatabase
-import com.ostanets.todoapp.domain.DeleteNoteUseCase
-import com.ostanets.todoapp.domain.EditNoteUseCase
-import com.ostanets.todoapp.domain.GetNotesListUseCase
-import com.ostanets.todoapp.domain.NoteRepository
-import com.ostanets.todoapp.models.Note
+import com.ostanets.todoapp.data.NoteDao
+import com.ostanets.todoapp.data.NoteRepositoryImpl
+import com.ostanets.todoapp.domain.Note
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository : NoteRepository
+    private val noteDao : NoteDao
 
     init {
-        repository = TodoAppDatabase.getDatabase(application).getNoteDao()
+        noteDao = TodoAppDatabase.getDatabase(application).getNoteDao()
     }
 
-    private var getNotesListUseCase = GetNotesListUseCase(repository)
-    private var editNoteUseCase = EditNoteUseCase(repository)
-    private var deleteNoteUseCase = DeleteNoteUseCase(repository)
+    private var repository = NoteRepositoryImpl(noteDao)
 
-    private var _notesList = getNotesListUseCase.getNotesList()
+    private var _notesList = repository.getNotesList()
 
     val notesList: LiveData<List<Note>>
         get() {
@@ -37,12 +33,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
     fun togglePinStatus(note: Note) = viewModelScope.launch {
-        editNoteUseCase.editNote(note.copy(pinned = !note.pinned))
+        repository.editNote(note.copy(pinned = !note.pinned))
     }
 
     fun deleteNote(note: Note) = viewModelScope.launch {
         note.id ?: throw RuntimeException("Cannot delete note. Note id is empty.")
-        deleteNoteUseCase.deleteNote(note.id)
+        repository.deleteNote(note.id)
     }
 
     fun setActiveFragment(id: Int) {

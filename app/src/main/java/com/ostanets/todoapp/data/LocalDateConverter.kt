@@ -1,4 +1,4 @@
-package com.ostanets.todoapp.models
+package com.ostanets.todoapp.data
 
 import androidx.room.TypeConverter
 import org.threeten.bp.LocalDateTime

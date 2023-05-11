@@ -1,4 +1,4 @@
-package com.ostanets.todoapp.models
+package com.ostanets.todoapp.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -22,8 +22,12 @@ data class Note(
 
     @PrimaryKey(autoGenerate = true)
     val id: Long? = null
-) {
-    companion object {
-        const val UNDEFINED_ID = -1L
-    }
+)
+
+fun com.ostanets.todoapp.domain.Note.toEntity(): Note {
+    return Note(title, body, pinned, date, id)
+}
+
+fun Note.fromEntity(): com.ostanets.todoapp.domain.Note {
+    return com.ostanets.todoapp.domain.Note(title, body, pinned, date, id)
 }

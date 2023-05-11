@@ -6,21 +6,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ostanets.todoapp.data.TodoAppDatabase
-import com.ostanets.todoapp.domain.AddNoteUseCase
-import com.ostanets.todoapp.domain.DeleteNoteUseCase
-import com.ostanets.todoapp.domain.EditNoteUseCase
-import com.ostanets.todoapp.domain.GetNoteUseCase
-import com.ostanets.todoapp.domain.NoteRepository
-import com.ostanets.todoapp.models.Note
+import com.ostanets.todoapp.data.NoteDao
+import com.ostanets.todoapp.data.NoteRepositoryImpl
+import com.ostanets.todoapp.domain.Note
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDateTime
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: NoteRepository
+    private val noteDao : NoteDao
 
     init {
-        repository = TodoAppDatabase.getDatabase(application).getNoteDao()
+        noteDao = TodoAppDatabase.getDatabase(application).getNoteDao()
     }
 
     private val _shouldCloseScreen = MutableLiveData<Int>()
@@ -35,17 +32,14 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     val pinned: LiveData<Boolean>
         get() = _pinned
 
-    private var getNoteUseCase = GetNoteUseCase(repository)
-    private var addNoteUseCase = AddNoteUseCase(repository)
-    private var editNoteUseCase = EditNoteUseCase(repository)
-    private var deleteNoteUseCase = DeleteNoteUseCase(repository)
+    private var repository = NoteRepositoryImpl(noteDao)
 
     fun finishWork(mode: Int) {
         _shouldCloseScreen.value = mode
     }
 
     fun getNote(noteId: Long) = viewModelScope.launch {
-        val note = getNoteUseCase.getNote(noteId)
+        val note = repository.getNote(noteId)
         _currentNote.value = note
         _pinned.value = note.pinned
     }
@@ -74,13 +68,13 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun manualDeleteNote() = viewModelScope.launch {
-        currentNote.value?.id?.let { deleteNoteUseCase.deleteNote(it) }
+        currentNote.value?.id?.let { repository.deleteNote(it) }
         finishWork(EXIT_WITHOUT_SAVE_CHANGES)
     }
 
     private fun createNote(title: String, body: String) = viewModelScope.launch {
         _pinned.value ?: throw RuntimeException("Cannot create note. Pinned status is undefined.")
-        val insertedId = addNoteUseCase.addNote(
+        val insertedId = repository.addNote(
             Note(title, body, _pinned.value!!, LocalDateTime.now())
         )
 
@@ -90,7 +84,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private fun editNote(title: String, body: String) = viewModelScope.launch {
         currentNote.value ?: throw RuntimeException("Cannot edit note. Current note is empty.")
         _pinned.value ?: throw RuntimeException("Cannot edit note. Pinned status is undefined.")
-        editNoteUseCase.editNote(
+        repository.editNote(
             currentNote.value!!.copy(
                 title = title,
                 body = body,
@@ -102,7 +96,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun deleteNote() = viewModelScope.launch {
         currentNote.value ?: throw RuntimeException("Cannot delete note. Current note is empty.")
-        currentNote.value!!.id?.let { deleteNoteUseCase.deleteNote(it) }
+        currentNote.value!!.id?.let { repository.deleteNote(it) }
     }
 
     private fun parseInput(string: String?): String {

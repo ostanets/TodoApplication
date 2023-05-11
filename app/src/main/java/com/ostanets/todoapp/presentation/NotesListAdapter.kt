@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.ostanets.todoapp.databinding.NoteItemBinding
-import com.ostanets.todoapp.models.Note
+import com.ostanets.todoapp.domain.Note
 
 class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()) {
     var onNoteLongClickListener: ((Note) -> Unit)? = null

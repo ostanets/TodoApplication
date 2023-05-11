@@ -1,7 +1,7 @@
 package com.ostanets.todoapp.presentation
 
 import androidx.recyclerview.widget.DiffUtil
-import com.ostanets.todoapp.models.Note
+import com.ostanets.todoapp.domain.Note
 
 class NoteDiffCallback : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
