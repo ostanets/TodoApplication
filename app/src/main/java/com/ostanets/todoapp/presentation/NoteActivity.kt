@@ -163,8 +163,8 @@ class NoteActivity : AppCompatActivity() {
     private fun launchEditMode() {
         viewModel.getNote(noteId)
         viewModel.currentNote.observe(this) {
-            binding.title = it.title
-            binding.body = it.body
+            binding.etTitle.setText(it.title)
+            binding.etBody.setText(it.body)
         }
 
         setupPinButton()

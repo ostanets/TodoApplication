@@ -12,11 +12,11 @@ class NoteViewHolder(private val binding: NoteItemBinding) : ViewHolder(binding.
     val view: View = binding.root
 
     fun setBody(content: String) {
-        binding.body = content
+        binding.twNoteBody.text = content
     }
 
     fun setDate(date: LocalDateTime) {
-        binding.date = formatter.format(date)
+        binding.twNoteDate.text = formatter.format(date)
     }
 
     fun setPinned(status: Boolean) {
