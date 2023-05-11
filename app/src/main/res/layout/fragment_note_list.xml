@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
@@ -7,37 +8,33 @@
     android:focusableInTouchMode="true"
     tools:context=".presentation.NoteListFragment">
 
-    <LinearLayout
+    <SearchView
+        android:id="@+id/sv_note_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/search_background"
+        android:iconifiedByDefault="false"
         android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:queryBackground="@null"
+        android:queryHint="@string/search"
+        android:theme="@style/AppSearchView"
+        app:layout_constraintEnd_toEndOf="@+id/rv_note_list"
+        app:layout_constraintStart_toStartOf="@+id/rv_note_list"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <SearchView
-            android:id="@+id/sv_note_list"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/search_background"
-            android:iconifiedByDefault="false"
-            android:orientation="vertical"
-            android:queryBackground="@null"
-            android:queryHint="@string/search"
-            android:theme="@style/AppSearchView">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_note_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:paddingTop="4dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_note_list"
+        tools:listitem="@layout/note_item" />
 
-        </SearchView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_note_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="false"
-            android:paddingTop="4dp"
-            android:paddingBottom="20dp"
-            tools:listitem="@layout/note_item" />
-    </LinearLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

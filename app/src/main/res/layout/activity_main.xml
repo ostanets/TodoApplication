@@ -130,12 +130,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0" />
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/background_tint_for_fab"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#E60A0A23"
         android:clickable="true"
+        android:contentDescription="@null"
         android:focusable="true"
         android:orientation="vertical"
         android:visibility="gone"
@@ -180,8 +181,7 @@
         app:layout_constraintStart_toStartOf="@+id/main_fab"
         app:maxImageSize="20dp"
         app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
-        app:tint="#000000"
-        tools:visibility="visible" />
+        app:tint="#000000" />
 
     <TextView
         android:id="@+id/schedule_textView"
@@ -194,8 +194,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/schedule_fab"
         app:layout_constraintEnd_toStartOf="@+id/schedule_fab"
-        app:layout_constraintTop_toTopOf="@+id/schedule_fab"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="@+id/schedule_fab" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/note_fab"
@@ -215,8 +214,7 @@
         app:layout_constraintStart_toStartOf="@+id/main_fab"
         app:maxImageSize="20dp"
         app:shapeAppearanceOverlay="@style/FloatingActionButtonExt"
-        app:tint="#000000"
-        tools:visibility="visible" />
+        app:tint="#000000" />
 
     <TextView
         android:id="@+id/note_textView"
@@ -229,7 +227,6 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/note_fab"
         app:layout_constraintEnd_toStartOf="@+id/note_fab"
-        app:layout_constraintTop_toTopOf="@+id/note_fab"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="@+id/note_fab" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
